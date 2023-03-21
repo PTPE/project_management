@@ -1,7 +1,5 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import { Homepage } from "./Page/Homepage";
 import { RedirectPage } from "./Page/RedirectPage";
 import { IssuePage } from "./Page/IssuePage";
