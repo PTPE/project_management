@@ -29,6 +29,7 @@ const Options = styled.div`
   border-radius: 10px;
   padding: 10px;
   list-style-type: square;
+  cursor: pointer;
   @media (max-width: 768px) {
     position: absolute;
     left: 15%;

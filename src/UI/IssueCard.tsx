@@ -47,9 +47,7 @@ const BasicInfo = styled.div`
     border-radius: 10px;
     display: flex;
     cursor: pointer;
-    &:hover {
-      background: #e5e5e5;
-    }
+    background: #e5e5e5;
   }
   .title {
     font-size: 30px;

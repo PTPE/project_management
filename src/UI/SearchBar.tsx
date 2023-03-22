@@ -25,6 +25,6 @@ const Submit = styled.input`
   border: none;
   border-radius: 10px;
   padding: 5px;
-  background: #8dcbe6;
+  background: #e6e6e6;
   cursor: pointer;
 `;

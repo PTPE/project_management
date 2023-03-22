@@ -31,9 +31,10 @@ const Time = styled.div`
     color: white;
   }
   .new {
-    background: #33494a;
+    background: #0e8388;
   }
   .old {
-    background: #8bb0b1;
+    background: #e6e6e6;
+    color: black;
   }
 `;
