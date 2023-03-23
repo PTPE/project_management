@@ -8,6 +8,7 @@ type UpdateIssueProps = {
     progress: boolean;
     closed: boolean;
   };
+  onPassTimeOrder: boolean;
 };
 
 export const UpdateIssue = (props: UpdateIssueProps) => {

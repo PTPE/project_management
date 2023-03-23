@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { UpdateIssue } from "../Data/UpdateIssue";
 import { SearchBar } from "../Layout/SearchBar/SearchBar";
 import { LabelFilter } from "../Layout/LabelFilter/LabelFilter";
-import { TimeOrder } from "../Layout/TimeOrder";
+import { TimeOrder } from "../Layout/TimeOrder/TimeOrder";
 import { AddButton } from "../Layout/AddButton";
 
 export const IssuePage = () => {
@@ -13,14 +13,10 @@ export const IssuePage = () => {
     progress: false,
     closed: false,
   });
-  const [timeOrder, setTimeOrder] = useState(true);
+  const [descendent, setdescendent] = useState(true);
 
   const setSearchHandler = (search: string) => {
     setSearch(search);
-  };
-
-  const setTimeOrderHandler = (time: boolean) => {
-    setTimeOrder(time);
   };
 
   useEffect(() => {
@@ -35,11 +31,18 @@ export const IssuePage = () => {
           onPassLabelFilterHandler={setlabelFilter}
           onPassLabelFilter={labelFilter}
         />
-        <TimeOrder />
+        <TimeOrder
+          onPassSetTimeOrderHandler={setdescendent}
+          onPassTimeOrder={descendent}
+        />
         <AddButton />
       </Filter>
       <Issue>
-        <UpdateIssue onPassSearch={search} onPassLabelFilter={labelFilter} />
+        <UpdateIssue
+          onPassSearch={search}
+          onPassLabelFilter={labelFilter}
+          onPassTimeOrder={descendent}
+        />
       </Issue>
     </Container>
   );
