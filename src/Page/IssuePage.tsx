@@ -2,29 +2,23 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { UpdateIssue } from "../Data/UpdateIssue";
 import { SearchBar } from "../Layout/SearchBar/SearchBar";
-import { LabelFilter } from "../Layout/LabelFilter";
+import { LabelFilter } from "../Layout/LabelFilter/LabelFilter";
 import { TimeOrder } from "../Layout/TimeOrder";
 import { AddButton } from "../Layout/AddButton";
 
 export const IssuePage = () => {
   const [search, setSearch] = useState("");
-  const [labelFilter, setlabelFilter] = useState([
-    { open: false, progress: false, closed: false },
-  ]);
+  const [labelFilter, setlabelFilter] = useState({
+    open: false,
+    progress: false,
+    closed: false,
+  });
   const [timeOrder, setTimeOrder] = useState(true);
 
   const setSearchHandler = (search: string) => {
     setSearch(search);
   };
-  const setLabelFilterHandler = (
-    label: {
-      open: boolean;
-      progress: boolean;
-      closed: boolean;
-    }[]
-  ) => {
-    setlabelFilter(label);
-  };
+
   const setTimeOrderHandler = (time: boolean) => {
     setTimeOrder(time);
   };
@@ -37,12 +31,15 @@ export const IssuePage = () => {
     <Container>
       <SearchBar onPassSearchHandler={setSearchHandler} />
       <Filter>
-        <LabelFilter />
+        <LabelFilter
+          onPassLabelFilterHandler={setlabelFilter}
+          onPassLabelFilter={labelFilter}
+        />
         <TimeOrder />
         <AddButton />
       </Filter>
       <Issue>
-        <UpdateIssue onPassSearch={search} />
+        <UpdateIssue onPassSearch={search} onPassLabelFilter={labelFilter} />
       </Issue>
     </Container>
   );

@@ -3,6 +3,11 @@ import { IssueCard } from "../Layout/IssueCard";
 
 type UpdateIssueProps = {
   onPassSearch: string;
+  onPassLabelFilter: {
+    open: boolean;
+    progress: boolean;
+    closed: boolean;
+  };
 };
 
 export const UpdateIssue = (props: UpdateIssueProps) => {
