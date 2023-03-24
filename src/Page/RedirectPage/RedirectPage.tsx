@@ -1,4 +1,4 @@
-import { UserAithorization } from "../Data/UserAuthorization";
+import { UserAithorization } from "../IssuePage/IssueData/UserAuthorization";
 import styled from "styled-components";
 export const RedirectPage = () => {
   UserAithorization();

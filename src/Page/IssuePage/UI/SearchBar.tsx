@@ -1,11 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-
-type SubmitProps = {
+type SearchProps = {
   onPassSearchHandler: Function;
 };
 
-export const SearchBarItem = (props: SubmitProps) => {
+export const SearchBar = (props: SearchProps) => {
   const [value, setValue] = useState("");
 
   const setValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +15,6 @@ export const SearchBarItem = (props: SubmitProps) => {
     e.preventDefault();
     props.onPassSearchHandler(value);
   };
-
   return (
     <Container>
       <SearchWord onChange={setValueHandler} value={value} />
@@ -24,6 +22,7 @@ export const SearchBarItem = (props: SubmitProps) => {
     </Container>
   );
 };
+
 const Container = styled.div`
   width: 50%;
   display: flex;

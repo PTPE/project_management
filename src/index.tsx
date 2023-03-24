@@ -1,11 +1,10 @@
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { Homepage } from "./Page/Homepage";
-import { RedirectPage } from "./Page/RedirectPage";
-import { IssuePage } from "./Page/IssuePage";
+import { Homepage } from "./Page/Homepage/Homepage";
+import { RedirectPage } from "./Page/RedirectPage/RedirectPage";
+import { IssuePage } from "./Page/IssuePage/IssuePage";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { UserProvider } from "./Data/UserProvider";
 
 const router = createBrowserRouter([
   {
@@ -19,11 +18,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(
-  <UserProvider>
-    <RouterProvider router={router} />
-  </UserProvider>
-);
+root.render(<RouterProvider router={router} />);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

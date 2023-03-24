@@ -10,7 +10,9 @@ export const UserAithorization = () => {
       const res = await fetch(`/code/${code}`);
       const data = await res.json();
       if (!res.ok) throw new Error("Authorization fails");
-      ContextValue.setUser({ owner: data[0].login, token: data[1] });
+      const storedData = { owner: data[0].login, token: data[1] };
+      localStorage.setItem("user", JSON.stringify(storedData));
+      // ContextValue.setUser({ owner: data[0].login, token: data[1] });
     } catch (err) {
       alert(err);
     }
@@ -27,7 +29,11 @@ export const UserAithorization = () => {
   useEffect(() => {
     if (!code) return;
     fetchUserData()
-      .then((_) => window.location.assign("http://localhost:3000/issue"))
+      .then(
+        (_) =>
+          !(localStorage.getItem("user")?.length === 0) &&
+          window.location.assign("http://localhost:3000/issue")
+      )
       .catch((_) => window.location.assign("http://localhost:3000/login"));
-  }, [code]);
+  }, [code, localStorage.getItem("user")]);
 };

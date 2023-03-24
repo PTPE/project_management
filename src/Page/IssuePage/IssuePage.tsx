@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import { UpdateIssue } from "../Data/UpdateIssue";
-import { SearchBar } from "../Layout/SearchBar/SearchBar";
-import { LabelFilter } from "../Layout/LabelFilter/LabelFilter";
-import { TimeOrder } from "../Layout/TimeOrder/TimeOrder";
-import { AddButton } from "../Layout/AddButton";
-
+import { UpdateIssue } from "./IssueData/UpdateIssue";
+import { SearchBar } from "./UI/SearchBar";
+import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
+import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
+import { AddButton } from "./UI/AddButton";
 export const IssuePage = () => {
   const [search, setSearch] = useState("");
   const [labelFilter, setlabelFilter] = useState({
@@ -15,17 +14,9 @@ export const IssuePage = () => {
   });
   const [descendent, setdescendent] = useState(true);
 
-  const setSearchHandler = (search: string) => {
-    setSearch(search);
-  };
-
-  useEffect(() => {
-    console.log(search);
-  }, [search]);
-
   return (
     <Container>
-      <SearchBar onPassSearchHandler={setSearchHandler} />
+      <SearchBar onPassSearchHandler={setSearch} />
       <Filter>
         <LabelFilter
           onPassLabelFilterHandler={setlabelFilter}

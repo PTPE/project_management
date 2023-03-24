@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LabelFilterItems } from "./LabelFilterItems.tsx/LabelFilterItems";
+import { LabelFilterItems } from "./LabelFilterItems";
 import styled from "styled-components";
 
 type LabelFilterProps = {
