@@ -16,20 +16,29 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
   useEffect(() => {
     const search = props.onPassSearch;
 
-    const label = () => {
-      const selected = (
-        Object.keys(
-          props.onPassLabelFilter
-        ) as (keyof typeof props.onPassLabelFilter)[]
-      ).filter((key) => props.onPassLabelFilter[key]);
+    const owner = JSON.parse(localStorage.getItem("user")!).owner;
 
-      const selectedString = selected.map((label) => `"${label}"`).join(",");
-      return selectedString;
+    const label = () => {
+      const label = ["open", "in progress", "closed"];
+      const selected = label
+        .filter((_, i) => Object.values(props.onPassLabelFilter)[i])
+        .map((label) => `"${label}"`)
+        .join(",");
+      const result =
+        selected.length === 0
+          ? `label:"open","in progress","closed"`
+          : `label:${selected}`;
+
+      return result;
     };
 
     const time = props.onPassTimeOrder ? "desc" : "asc";
 
-    // FetchIssue(owner, search, label(), time, "1");
+    (async () => {
+      const data = await FetchIssue(owner, search, label(), time, "1");
+      console.log(data);
+    })();
+    console.log(label());
   }, [props.onPassLabelFilter, props.onPassSearch, props.onPassTimeOrder]);
 
   return <IssueCard></IssueCard>;

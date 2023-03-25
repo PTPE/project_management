@@ -6,9 +6,10 @@ export const FetchIssue = async (
   page: string
 ) => {
   const res = await fetch(
-    `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+label:${label}%20user:${owner}&per_page=10&page=${page}&sort=created&direction=${time}`
+    `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=10&page=${page}&sort=created&direction=${time}`
   );
   const data = await res.json();
+
   return data;
 };
 
