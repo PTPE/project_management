@@ -1,22 +1,34 @@
 import { useState } from "react";
 import styled from "styled-components";
-export const StateOption = () => {
-  const [showOption, setShowOption] = useState(false);
+
+type StateOptiosProps = {
+  passState: string;
+};
+
+export const State = (props: StateOptiosProps) => {
+  const [clickState, setClickState] = useState(false);
 
   document.addEventListener("click", (e) => {
     if (!(e.target as Element).classList.contains("state"))
-      setShowOption(false);
-    else setShowOption(true);
+      setClickState(false);
   });
-
   return (
-    <Options className={showOption ? "show" : ""}>
-      <li className="open">Open</li>
-      <li className="progress">In Progress</li>
-      <li className="closed">Closed</li>
-    </Options>
+    <div
+      className="state"
+      onClick={() => {
+        setClickState(true);
+      }}
+    >
+      {props.passState}
+      <Options className={clickState ? "show" : ""}>
+        <li className="open">Open</li>
+        <li className="progress">In Progress</li>
+        <li className="closed">Closed</li>
+      </Options>
+    </div>
   );
 };
+
 const Options = styled.div`
   display: none;
   flex-direction: column;

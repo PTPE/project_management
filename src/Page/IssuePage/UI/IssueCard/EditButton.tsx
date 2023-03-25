@@ -7,12 +7,18 @@ export const EditButton = () => {
   document.addEventListener("click", (e) => {
     if (!(e.target as Element).classList.contains("option"))
       setShowOption(false);
-    else setShowOption(true);
   });
 
   return (
     <Edit>
-      <Dots className="option">...</Dots>
+      <Dots
+        className="option"
+        onClick={() => {
+          setShowOption(true);
+        }}
+      >
+        ...
+      </Dots>
       <Options className={showOptions ? "show" : ""}>
         <span className="edit">Edit</span>
         <span className="delete">Delete</span>

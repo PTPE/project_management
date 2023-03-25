@@ -13,6 +13,7 @@ type UpdateIssueProps = {
 };
 
 export const UpdateIssue = (props: UpdateIssueProps) => {
+  const [issueData, setIssueData] = useState<String[]>([]);
   useEffect(() => {
     const search = props.onPassSearch;
 
@@ -36,10 +37,10 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
 
     (async () => {
       const data = await FetchIssue(owner, search, label(), time, "1");
-      console.log(data);
+      setIssueData(data.items);
     })();
     console.log(label());
   }, [props.onPassLabelFilter, props.onPassSearch, props.onPassTimeOrder]);
 
-  return <IssueCard></IssueCard>;
+  return <IssueCard passIssueData={issueData}></IssueCard>;
 };
