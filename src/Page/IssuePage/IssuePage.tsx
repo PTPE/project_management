@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { UpdateIssue } from "./IssueData/UpdateIssue";
 import { SearchBar } from "./UI/SearchBar";
 import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
 import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
 import { AddButton } from "./UI/AddButton";
+import { isPageBottom } from "./IssueData/APIService";
+
 export const IssuePage = () => {
   const [search, setSearch] = useState("");
   const [labelFilter, setlabelFilter] = useState({
@@ -13,9 +15,16 @@ export const IssuePage = () => {
     closed: false,
   });
   const [descendent, setdescendent] = useState(true);
+  const [isBottom, setIsBottom] = useState(false);
+  const pageRef = useRef<HTMLInputElement>(null);
+
+  window.addEventListener("scroll", () => {
+    if (!pageRef.current) return;
+    setIsBottom(isPageBottom(pageRef));
+  });
 
   return (
-    <Container>
+    <Container ref={pageRef}>
       <SearchBar onPassSearchHandler={setSearch} />
       <Filter>
         <LabelFilter
@@ -30,9 +39,10 @@ export const IssuePage = () => {
       </Filter>
       <Issue>
         <UpdateIssue
-          onPassSearch={search}
-          onPassLabelFilter={labelFilter}
-          onPassTimeOrder={descendent}
+          passSearch={search}
+          passLabelFilter={labelFilter}
+          passTimeOrder={descendent}
+          passIsBottom={isBottom}
         />
       </Issue>
     </Container>

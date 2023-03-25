@@ -31,18 +31,24 @@ export const IssueCard = (props: IssueCardProps) => {
     return result;
   };
 
+  const capitalization = (word: string) =>
+    word
+      .split(" ")
+      .map((word) => word[0].toLocaleUpperCase() + word.slice(1))
+      .join(" ");
+  if (!props.passIssueData) return <div>no data</div>;
+
   return props.passIssueData.map((data: Data, i: string) => {
     return (
       <Container key={i}>
         <BasicInfo>
-          <State passState={data.labels[0].name} />
+          <State passState={capitalization(data.labels[0].name)} />
           <h3 className="title">{data.title}</h3>
           <h3 className="repo">
             {data.repository_url.slice(30 + data.user.login.length)}
           </h3>
           <h6 className="time">{convertTime(data.created_at)}</h6>
         </BasicInfo>
-
         <Body>{data.body}</Body>
         <EditButton />
       </Container>
@@ -62,6 +68,7 @@ const Container = styled.div`
     flex-direction: column;
     padding: 20px 40px 20px 40px;
   }
+  margin-bottom: 50px;
 `;
 const BasicInfo = styled.div`
   display: flex;

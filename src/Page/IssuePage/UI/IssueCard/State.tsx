@@ -13,13 +13,15 @@ export const State = (props: StateOptiosProps) => {
       setClickState(false);
   });
   return (
-    <div
-      className="state"
-      onClick={() => {
-        setClickState(true);
-      }}
-    >
-      {props.passState}
+    <div>
+      <CurrentState
+        className="state"
+        onClick={() => {
+          setClickState(true);
+        }}
+      >
+        {props.passState}
+      </CurrentState>
       <Options className={clickState ? "show" : ""}>
         <li className="open">Open</li>
         <li className="progress">In Progress</li>
@@ -28,7 +30,14 @@ export const State = (props: StateOptiosProps) => {
     </div>
   );
 };
-
+const CurrentState = styled.span`
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background: #e5e5e5;
+    border-radius: 10px;
+  }
+`;
 const Options = styled.div`
   display: none;
   flex-direction: column;
