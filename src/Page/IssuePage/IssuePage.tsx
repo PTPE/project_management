@@ -6,6 +6,7 @@ import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
 import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
 import { AddButton } from "./UI/AddButton";
 import { isPageBottom } from "./IssueData/APIService";
+import { Modal } from "./UI/Modal/Modal";
 
 export const IssuePage = () => {
   const [search, setSearch] = useState("");
@@ -25,6 +26,7 @@ export const IssuePage = () => {
 
   return (
     <Container ref={pageRef}>
+      <Modal></Modal>
       <SearchBar onPassSearchHandler={setSearch} />
       <Filter>
         <LabelFilter
@@ -49,12 +51,12 @@ export const IssuePage = () => {
   );
 };
 const Container = styled.div`
-  padding: 50px;
+  padding: 0px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #e9f8f9;
-  height: 100%;
+  min-height: 100vh;
 `;
 const Issue = styled.div`
   width: 60%;
