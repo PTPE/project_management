@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FormModal } from "./Modal/FormModal";
 import styled from "styled-components";
 
-export const AddButton = () => {
+export const AddNewIssueButton = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (

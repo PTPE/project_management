@@ -4,9 +4,8 @@ import { UpdateIssue } from "./IssueData/UpdateIssue";
 import { SearchBar } from "./UI/SearchBar";
 import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
 import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
-import { AddButton } from "./UI/AddButton";
+import { AddNewIssueButton } from "./UI/AddIssueButton";
 import { isPageBottom } from "./IssueData/APIService";
-import { ModalPortal } from "./UI/Modal/Modal";
 
 export const IssuePage = () => {
   const [search, setSearch] = useState("");
@@ -37,7 +36,7 @@ export const IssuePage = () => {
           onPassSetTimeOrderHandler={setdescendent}
           onPassTimeOrder={descendent}
         />
-        <AddButton />
+        <AddNewIssueButton />
       </Filter>
       <Issue>
         <UpdateIssue

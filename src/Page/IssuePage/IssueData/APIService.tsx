@@ -3,17 +3,12 @@ export const fetchIssue = async (
   search: string,
   label: string,
   time: string,
-  dataNum: string
+  page: string
 ) => {
   const res = await fetch(
-    `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=${dataNum}&page=1&sort=created&direction=${time}`
+    `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=10&page=${page}&sort=created&direction=${time}`
   );
   const data = await res.json();
-  console.log(
-    `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=${dataNum}&page=1&sort=created&direction=${time}`
-  );
-
-  console.log(data);
 
   return data;
 };
@@ -39,12 +34,6 @@ export const addNewIssue = async (
     }
   );
   const data = await res.json();
-  console.log(
-    `https://api.github.com/repos/${owner}/${body.repository}/issues`
-  );
-  console.log(body);
-
-  console.log(data);
 };
 
 export const editIssue = async (
@@ -69,10 +58,9 @@ export const editIssue = async (
     }
   );
   const data = await res.json();
-  console.log(data);
 };
 
-export const isPageBottom = (pageRef: React.RefObject<HTMLInputElement>) => {
+export const isPageBottom = (pageRef: React.RefObject<HTMLDivElement>) => {
   const pageHeight = pageRef.current!.scrollHeight;
   const viewportHeight = window.innerHeight;
   const scrollHeight = window.pageYOffset;

@@ -19,7 +19,7 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
     search: "",
     label: "",
     time: "",
-    dataNum: "",
+    page: "",
   });
   const [issueData, setIssueData] = useState<String[]>([]);
 
@@ -47,22 +47,17 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
 
       return { ...prev, label: label() };
     });
+    if (props.passIsBottom)
+      setParams((prev) => {
+        const page =
+          issueData.length % 10 === 0
+            ? issueData.length / 10 + 1
+            : Math.ceil(issueData.length / 10);
+        return { ...prev, page: `${page}` };
+      });
     setParams((prev) => {
       const time = props.passTimeOrder ? "desc" : "asc";
       return { ...prev, time: time };
-    });
-    setParams((prev) => {
-      const dataNum = () => {
-        if (props.passIsBottom) {
-          return issueData.length % 10 === 0
-            ? issueData.length + 10
-            : issueData.length;
-        }
-        if (!props.passIsBottom) {
-          return issueData.length === 0 ? 10 : issueData.length;
-        }
-      };
-      return { ...prev, dataNum: `${dataNum()}` };
     });
   }, [
     props.passLabelFilter,
@@ -80,12 +75,12 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
           params.search,
           params.label,
           params.time,
-          "10"
+          "1"
         );
         setIssueData(data.items);
       }
     })();
-  }, [params.owner, params]);
+  }, [params.owner, params.label, params.search, params.time]);
 
   useEffect(() => {
     if (props.passIsBottom) {
@@ -96,13 +91,15 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
             params.search,
             params.label,
             params.time,
-            params.dataNum
+            params.page
           );
-          setIssueData(data.items);
+          setIssueData((prev) => {
+            return [...prev, ...data.items];
+          });
         }
       })();
     }
-  }, [params]);
+  }, [params.page]);
 
   return <IssueCard passIssueData={issueData}></IssueCard>;
 };
