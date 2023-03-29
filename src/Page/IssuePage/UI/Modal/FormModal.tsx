@@ -19,6 +19,15 @@ export const FormModal = (props: ModalContentProps) => {
   const field = ["title", "repository", "labels", "body"];
   const [form, setForm] = useState(props.passDefaultValue);
 
+  const formCheck = (field: string, value: string) => {
+    if (field === "title" || field === "repository") {
+      return value.length === 0 ? "show" : "not-show";
+    }
+    if (field === "body") {
+      return value.length < 30 ? "show" : "not-show";
+    }
+  };
+
   return (
     <ModalPortal
       passShowModal={props.passShowModal}
@@ -27,7 +36,7 @@ export const FormModal = (props: ModalContentProps) => {
       {
         <Field>
           {field.map((field, i) => (
-            <FieldItem key={i} className={field}>
+            <FieldItem key={i}>
               <label>{field[0].toUpperCase() + field.slice(1)}</label>
               <input
                 defaultValue={props.passDefaultValue[field]}
@@ -37,7 +46,12 @@ export const FormModal = (props: ModalContentProps) => {
                     [field]: e.target.value,
                   });
                 }}
+                className={`${formCheck(field, form[field])}`}
               />
+              <div className={formCheck(field, form[field])}>
+                {field === "title" || field === "repository" ? "Required" : ""}
+                {field === "body" ? "At least 30 words" : ""}
+              </div>
             </FieldItem>
           ))}
           <SubmitIssue
@@ -45,6 +59,12 @@ export const FormModal = (props: ModalContentProps) => {
             passIssueNumber={props.passIssueNumber}
             passMode={props.passMode}
             passShowModalHandler={props.passShowModalHandler}
+            passDisable={
+              form.body.length < 30 ||
+              form.title.length === 0 ||
+              form.repository.length === 0
+            }
+            passSetForm={setForm}
           />
         </Field>
       }
@@ -55,7 +75,7 @@ export const FormModal = (props: ModalContentProps) => {
 const Field = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   label {
     font-size: 20px;
   }
@@ -71,25 +91,25 @@ const FieldItem = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  &.title,
-  &.repository,
-  &.body {
-    position: relative;
-  }
-  &.title:after,
-  &.repository:after {
-    content: "Required";
-    color: red;
-    font-size: 10px;
-    position: absolute;
-    bottom: -15px;
-  }
+  position: relative;
 
-  &.body:after {
-    content: "At least 30 words";
-    color: red;
-    font-size: 10px;
+  div {
     position: absolute;
-    bottom: -15px;
+    bottom: -20px;
+  }
+  div.show {
+    color: red;
+    font-size: 14px;
+  }
+  div.not-show {
+    display: none;
+  }
+  input.show {
+    border: 1px solid red;
+    outline: none;
+  }
+  input.not-show {
+    border: 1px solid transparent;
+    outline: none;
   }
 `;

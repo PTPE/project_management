@@ -12,6 +12,16 @@ type SubmitIssueProps = {
   passIssueNumber: string;
   passMode: string;
   passShowModalHandler: React.Dispatch<React.SetStateAction<boolean>>;
+  passDisable: boolean;
+  passSetForm: React.Dispatch<
+    React.SetStateAction<{
+      [key: string]: string;
+      title: string;
+      repository: string;
+      labels: string;
+      body: string;
+    }>
+  >;
 };
 
 export const SubmitIssue = (props: SubmitIssueProps) => {
@@ -45,6 +55,7 @@ export const SubmitIssue = (props: SubmitIssueProps) => {
   useEffect(() => {
     setMode(props.passMode);
     console.log(mode);
+    console.log(props.passDisable);
   }, [mode]);
 
   return (
@@ -59,13 +70,16 @@ export const SubmitIssue = (props: SubmitIssueProps) => {
             )
           : addNewIssue(params.owner, params.token, params.body);
         props.passShowModalHandler(false);
+        props.passSetForm({ title: "", repository: "", labels: "", body: "" });
       }}
+      disabled={props.passDisable}
+      className={props.passDisable ? "inactive" : "active"}
     >
       Submit
     </Submit>
   );
 };
-const Submit = styled.div`
+const Submit = styled.button`
   font-size: 20px;
   padding: 8px;
   background: #0e8388;
@@ -75,8 +89,14 @@ const Submit = styled.div`
   cursor: pointer;
   color: white;
   margin-top: 15px;
-  &:hover {
+  border: none;
+  &.active:hover {
     background: #45c698;
     color: white;
+  }
+  &.inactive {
+    background: #073d40;
+    color: black;
+    cursor: auto;
   }
 `;
