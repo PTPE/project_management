@@ -85,7 +85,7 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
         setIssueData(data.items);
       }
     })();
-  }, [params.owner]);
+  }, [params.owner, params]);
 
   useEffect(() => {
     if (props.passIsBottom) {
