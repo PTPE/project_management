@@ -9,21 +9,27 @@ export const fetchIssue = async (
     `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=${dataNum}&page=1&sort=created&direction=${time}`
   );
   const data = await res.json();
+  console.log(
+    `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=${dataNum}&page=1&sort=created&direction=${time}`
+  );
+
+  console.log(data);
+
   return data;
 };
 
 export const addNewIssue = async (
   owner: string,
-  repo: string,
   token: string,
   body: {
     title: string;
     labels: string[];
     body: string;
+    repository: string;
   }
 ) => {
   const res = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/issues`,
+    `https://api.github.com/repos/${owner}/${body.repository}/issues`,
     {
       method: "POST",
       headers: {
@@ -32,23 +38,28 @@ export const addNewIssue = async (
       body: JSON.stringify(body),
     }
   );
-  const data = res.json();
+  const data = await res.json();
+  console.log(
+    `https://api.github.com/repos/${owner}/${body.repository}/issues`
+  );
+  console.log(body);
+
   console.log(data);
 };
 
-export const aditIssue = async (
+export const editIssue = async (
   owner: string,
-  repo: string,
   token: string,
   issueNumber: string,
   body: {
     title: string;
-    labels: string[];
+    repository: string;
+    labels: Array<string>;
     body: string;
   }
 ) => {
   const res = await fetch(
-    `https://api.github.com/repos/${owner}/${repo}/issues/${issueNumber}`,
+    `https://api.github.com/repos/${owner}/${body.repository}/issues/${issueNumber}`,
     {
       method: "PATCH",
       headers: {

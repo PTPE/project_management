@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { EditButton } from "./EditButton";
 import { State } from "./State";
 import styled from "styled-components";
@@ -16,6 +15,7 @@ type Data = {
   user: { login: string };
   created_at: string;
   body: string;
+  number: string;
 };
 
 export const IssueCard = (props: IssueCardProps) => {
@@ -50,7 +50,15 @@ export const IssueCard = (props: IssueCardProps) => {
           <h6 className="time">{convertTime(data.created_at)}</h6>
         </BasicInfo>
         <Body>{data.body}</Body>
-        <EditButton />
+        <EditButton
+          passIssueNumber={data.number}
+          passDefaultValue={{
+            title: data.title,
+            repository: data.repository_url.slice(30 + data.user.login.length),
+            labels: data.labels[0].name,
+            body: data.body,
+          }}
+        />
       </Container>
     );
   });

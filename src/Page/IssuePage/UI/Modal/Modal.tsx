@@ -1,34 +1,52 @@
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-export const Modal = () => {
-  const field = ["Title", "Repository", "Label", "Body"];
+
+type ModalProps = {
+  passShowModal: boolean;
+  passShowModalHandler: React.Dispatch<React.SetStateAction<boolean>>;
+  children: React.ReactNode;
+};
+
+export const Modal = ({
+  passShowModal,
+  passShowModalHandler,
+  children,
+}: ModalProps) => {
   return (
-    <Container>
+    <Container Show={passShowModal}>
       <Backdrop />
       <ModalContainer>
-        <Field>
-          {field.map((field, i) => (
-            <FieldItem key={i} className={field.toLowerCase()}>
-              <label>{field}</label>
-              <input />
-            </FieldItem>
-          ))}
-        </Field>
-        <Submit>Submit</Submit>
+        <Exit
+          onClick={() => {
+            passShowModalHandler(false);
+          }}
+        >
+          <div className="line one"></div>
+          <div className="line two"></div>
+        </Exit>
+        <div>{children}</div>
       </ModalContainer>
     </Container>
   );
 };
 
-export const ModalPortal = () => {
-  return ReactDOM.createPortal(<Modal />, document.getElementById("modal")!);
+export const ModalPortal = (props: ModalProps) => {
+  return ReactDOM.createPortal(
+    <Modal
+      passShowModal={props.passShowModal}
+      passShowModalHandler={props.passShowModalHandler}
+    >
+      {props.children}
+    </Modal>,
+    document.getElementById("modal")!
+  );
 };
 
-const Container = styled.div`
-  display: flex;
+const Container = styled.div<{ Show: boolean }>`
+  position: fixed;
+  display: ${(props) => (props.Show ? "flex" : "none")};
   justify-content: center;
   align-items: center;
-  position: fixed;
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -40,67 +58,33 @@ const Backdrop = styled.div`
   background: rgba(44, 51, 51, 0.75);
 `;
 const ModalContainer = styled.div`
-  padding: 80px;
+  padding: 50px;
   background: #e9f8f9;
   z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 15px;
+  position: relative;
 `;
 
-const Field = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  label {
-    font-size: 16px;
-  }
-  input {
-    border: 1px solid #e8e8e8;
-    border-radius: 3px;
-    font-size: 18px;
-    padding: 5px;
-    width: 400px;
-  }
-`;
-const FieldItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  &.title,
-  &.repository,
-  &.body {
-    position: relative;
-  }
-  &.title:after,
-  &.repository:after {
-    content: "Required";
-    color: red;
-    font-size: 10px;
-    position: absolute;
-    bottom: -15px;
-  }
-
-  &.body:after {
-    content: "At least 30 words";
-    color: red;
-    font-size: 10px;
-    position: absolute;
-    bottom: -15px;
-  }
-`;
-
-const Submit = styled.div`
-  padding: 8px;
-  background: #0e8388;
-  border-radius: 3px;
-  font-weight: 600;
-  text-align: center;
+const Exit = styled.div`
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 15px;
+  right: 13px;
   cursor: pointer;
-  color: white;
-  margin-top: 15px;
-  &:hover {
-    background: #45c698;
-    color: white;
+  .line {
+    background: black;
+    width: 100%;
+    height: 2px;
+    position: absolute;
+    top: 12px;
+  }
+  .one {
+    transform: rotate(-45deg);
+  }
+  .two {
+    transform: rotate(45deg);
   }
 `;

@@ -1,8 +1,20 @@
 import { useState } from "react";
+import { FormModal } from "../Modal/FormModal";
 import styled from "styled-components";
 
-export const EditButton = () => {
+type EditProps = {
+  passIssueNumber: string;
+  passDefaultValue: {
+    title: string;
+    repository: string;
+    labels: string;
+    body: string;
+  };
+};
+
+export const EditButton = (props: EditProps) => {
   const [showOptions, setShowOption] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   document.addEventListener("click", (e) => {
     if (!(e.target as Element).classList.contains("option"))
@@ -20,9 +32,22 @@ export const EditButton = () => {
         ...
       </Dots>
       <Options className={showOptions ? "show" : ""}>
-        <span className="edit">Edit</span>
+        <span className="edit" onClick={() => setShowModal(true)}>
+          Edit
+        </span>
         <span className="delete">Delete</span>
       </Options>
+      {showModal ? (
+        <FormModal
+          passShowModal={showModal}
+          passShowModalHandler={setShowModal}
+          passDefaultValue={props.passDefaultValue}
+          passIssueNumber={props.passIssueNumber}
+          passMode="edit"
+        ></FormModal>
+      ) : (
+        ""
+      )}
     </Edit>
   );
 };

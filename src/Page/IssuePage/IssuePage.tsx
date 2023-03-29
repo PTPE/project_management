@@ -6,7 +6,7 @@ import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
 import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
 import { AddButton } from "./UI/AddButton";
 import { isPageBottom } from "./IssueData/APIService";
-import { Modal } from "./UI/Modal/Modal";
+import { ModalPortal } from "./UI/Modal/Modal";
 
 export const IssuePage = () => {
   const [search, setSearch] = useState("");
@@ -17,6 +17,7 @@ export const IssuePage = () => {
   });
   const [descendent, setdescendent] = useState(true);
   const [isBottom, setIsBottom] = useState(false);
+
   const pageRef = useRef<HTMLInputElement>(null);
 
   window.addEventListener("scroll", () => {
@@ -26,7 +27,6 @@ export const IssuePage = () => {
 
   return (
     <Container ref={pageRef}>
-      <Modal></Modal>
       <SearchBar onPassSearchHandler={setSearch} />
       <Filter>
         <LabelFilter
