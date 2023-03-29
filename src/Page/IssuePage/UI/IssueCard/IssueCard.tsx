@@ -1,3 +1,4 @@
+import React from "react";
 import { EditButton } from "./EditButton";
 import { State } from "./State";
 import styled from "styled-components";
@@ -18,7 +19,7 @@ type Data = {
   number: string;
 };
 
-export const IssueCard = (props: IssueCardProps) => {
+export const IssueCard = React.memo((props: IssueCardProps) => {
   const convertTime = (time: string) => {
     const timeStamp = Date.parse(time);
     const date = new Date(timeStamp);
@@ -62,7 +63,7 @@ export const IssueCard = (props: IssueCardProps) => {
       </Container>
     );
   });
-};
+});
 const Container = styled.div`
   width: 100%;
   display: flex;
