@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ModalPortal } from "./Modal";
-import { SubmitIssue } from "./SubmitIssue";
+import { SubmitForm } from "./SubmitForm";
 import styled from "styled-components";
 type ModalContentProps = {
   passDefaultValue: {
@@ -18,6 +18,7 @@ type ModalContentProps = {
 export const FormModal = (props: ModalContentProps) => {
   const field = ["title", "repository", "labels", "body"];
   const [form, setForm] = useState(props.passDefaultValue);
+  const labelOptions = ["open", "in progress", "closed"];
 
   const formCheck = (field: string, value: string) => {
     if (field === "title" || field === "repository") {
@@ -27,7 +28,6 @@ export const FormModal = (props: ModalContentProps) => {
       return value.length < 30 ? "show" : "not-show";
     }
   };
-
   return (
     <ModalPortal
       passShowModal={props.passShowModal}
@@ -38,23 +38,38 @@ export const FormModal = (props: ModalContentProps) => {
           {field.map((field, i) => (
             <FieldItem key={i}>
               <label>{field[0].toUpperCase() + field.slice(1)}</label>
-              <input
-                defaultValue={props.passDefaultValue[field]}
-                onChange={(e) => {
-                  setForm({
-                    ...form,
-                    [field]: e.target.value,
-                  });
-                }}
-                className={`${formCheck(field, form[field])}`}
-              />
+              {field === "labels" ? (
+                <select
+                  defaultValue={`${props.passDefaultValue.labels}`}
+                  onChange={(e) => {
+                    setForm({ ...form, labels: e.target.value });
+                  }}
+                >
+                  {labelOptions.map((label) => (
+                    <option value={label} key={label}>
+                      {label[0].toUpperCase() + label.slice(1)}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  defaultValue={props.passDefaultValue[field]}
+                  onChange={(e) => {
+                    setForm({
+                      ...form,
+                      [field]: e.target.value,
+                    });
+                  }}
+                  className={`${formCheck(field, form[field])}`}
+                />
+              )}
               <div className={formCheck(field, form[field])}>
                 {field === "title" || field === "repository" ? "Required" : ""}
                 {field === "body" ? "At least 30 words" : ""}
               </div>
             </FieldItem>
           ))}
-          <SubmitIssue
+          <SubmitForm
             passForm={form}
             passIssueNumber={props.passIssueNumber}
             passMode={props.passMode}
@@ -105,11 +120,24 @@ const FieldItem = styled.div`
     display: none;
   }
   input.show {
-    border: 1px solid red;
+    border: 2px solid red;
     outline: none;
   }
   input.not-show {
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     outline: none;
+  }
+  select {
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+  }
+  select:focus,
+  input:focus {
+    border-color: #6ea4e8;
   }
 `;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { editIssue, addNewIssue } from "../../IssueData/APIService";
 import styled from "styled-components";
 
-type SubmitIssueProps = {
+type SubmitFormProps = {
   passForm: {
     title: string;
     repository: string;
@@ -24,7 +24,7 @@ type SubmitIssueProps = {
   >;
 };
 
-export const SubmitIssue = (props: SubmitIssueProps) => {
+export const SubmitForm = (props: SubmitFormProps) => {
   const [params, setParams] = useState({
     owner: "",
     token: "",
@@ -54,8 +54,6 @@ export const SubmitIssue = (props: SubmitIssueProps) => {
 
   useEffect(() => {
     setMode(props.passMode);
-    console.log(mode);
-    console.log(props.passDisable);
   }, [mode]);
 
   return (
