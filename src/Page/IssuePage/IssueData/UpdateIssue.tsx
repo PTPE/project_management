@@ -77,6 +77,7 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
           params.time,
           "1"
         );
+        if (!data) return;
         setIssueData(data.items);
       }
     })();
@@ -93,6 +94,7 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
             params.time,
             params.page
           );
+          if (!data) return;
           setIssueData((prev) => {
             return [...prev, ...data.items];
           });

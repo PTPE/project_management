@@ -5,12 +5,17 @@ export const fetchIssue = async (
   time: string,
   page: string
 ) => {
-  const res = await fetch(
-    `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=10&page=${page}&sort=created&direction=${time}`
-  );
-  const data = await res.json();
+  try {
+    const res = await fetch(
+      `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=10&page=${page}&sort=created&direction=${time}`
+    );
+    const data = await res.json();
+    if (!res.ok) throw new Error("API rate limit exceeded");
 
-  return data;
+    return data;
+  } catch (err) {
+    alert(err);
+  }
 };
 
 export const addNewIssue = async (
@@ -23,16 +28,21 @@ export const addNewIssue = async (
     repository: string;
   }
 ) => {
-  await fetch(
-    `https://api.github.com/repos/${owner}/${body.repository}/issues`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    }
-  );
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${owner}/${body.repository}/issues`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if (!res.ok) throw new Error("API rate limit exceeded");
+  } catch (err) {
+    alert(err);
+  }
 };
 
 export const editIssue = async (
@@ -46,16 +56,21 @@ export const editIssue = async (
     body: string;
   }
 ) => {
-  await fetch(
-    `https://api.github.com/repos/${owner}/${body.repository}/issues/${issueNumber}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    }
-  );
+  try {
+    const res = await fetch(
+      `https://api.github.com/repos/${owner}/${body.repository}/issues/${issueNumber}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(body),
+      }
+    );
+    if (!res.ok) throw new Error("API rate limit exceeded");
+  } catch (err) {
+    alert(err);
+  }
 };
 
 export const isPageBottom = (pageRef: React.RefObject<HTMLDivElement>) => {
