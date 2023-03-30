@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { EditButton } from "./EditButton";
 import { State } from "./State";
 import styled from "styled-components";
@@ -43,7 +44,18 @@ export const IssueCard = React.memo((props: IssueCardProps) => {
     return (
       <Container key={i}>
         <BasicInfo>
-          <State passState={capitalization(data.labels[0].name)} />
+          <State
+            passState={capitalization(data.labels[0].name)}
+            passEditData={{
+              title: data.title,
+              repository: data.repository_url.slice(
+                30 + data.user.login.length
+              ),
+              labels: [data.labels[0].name],
+              body: data.body,
+            }}
+            passIssueNumber={data.number}
+          />
           <h3 className="title">{data.title}</h3>
           <h3 className="repo">
             {data.repository_url.slice(30 + data.user.login.length)}

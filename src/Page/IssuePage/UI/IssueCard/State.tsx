@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { editIssue } from "../../IssueData/APIService";
+import React from "react";
 import styled from "styled-components";
 
 type StateOptiosProps = {
   passState: string;
+  passEditData: {
+    title: string;
+    repository: string;
+    labels: [string];
+    body: string;
+  };
+  passIssueNumber: string;
 };
 
-export const State = (props: StateOptiosProps) => {
+export const State = React.memo((props: StateOptiosProps) => {
   const [clickState, setClickState] = useState(false);
+  const options = ["open", "in progress", "closed"];
 
   document.addEventListener("click", (e) => {
     if (!(e.target as Element).classList.contains("state"))
       setClickState(false);
   });
+
   return (
     <div>
       <CurrentState
@@ -22,14 +33,28 @@ export const State = (props: StateOptiosProps) => {
       >
         {props.passState}
       </CurrentState>
+
       <Options className={clickState ? "show" : ""}>
-        <li className="open">Open</li>
-        <li className="progress">In Progress</li>
-        <li className="closed">Closed</li>
+        {options.map((option) => (
+          <li
+            key={option}
+            className={option}
+            onClick={() => {
+              editIssue(
+                JSON.parse(localStorage.getItem("user")!).owner,
+                JSON.parse(localStorage.getItem("user")!).token,
+                props.passIssueNumber,
+                { ...props.passEditData, labels: [`${option}`] }
+              );
+            }}
+          >
+            {option[0].toUpperCase() + option.slice(1)}
+          </li>
+        ))}
       </Options>
     </div>
   );
-};
+});
 const CurrentState = styled.span`
   padding: 5px;
   cursor: pointer;

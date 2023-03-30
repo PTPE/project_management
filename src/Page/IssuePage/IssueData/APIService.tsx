@@ -23,7 +23,7 @@ export const addNewIssue = async (
     repository: string;
   }
 ) => {
-  const res = await fetch(
+  await fetch(
     `https://api.github.com/repos/${owner}/${body.repository}/issues`,
     {
       method: "POST",
@@ -33,7 +33,6 @@ export const addNewIssue = async (
       body: JSON.stringify(body),
     }
   );
-  const data = await res.json();
 };
 
 export const editIssue = async (
@@ -47,7 +46,7 @@ export const editIssue = async (
     body: string;
   }
 ) => {
-  const res = await fetch(
+  await fetch(
     `https://api.github.com/repos/${owner}/${body.repository}/issues/${issueNumber}`,
     {
       method: "PATCH",
@@ -57,7 +56,6 @@ export const editIssue = async (
       body: JSON.stringify(body),
     }
   );
-  const data = await res.json();
 };
 
 export const isPageBottom = (pageRef: React.RefObject<HTMLDivElement>) => {
