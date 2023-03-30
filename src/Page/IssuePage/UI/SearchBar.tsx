@@ -15,6 +15,7 @@ export const SearchBar = (props: SearchProps) => {
     e.preventDefault();
     props.onPassSearchHandler(value);
   };
+
   return (
     <Container>
       <SearchWord onChange={setValueHandler} value={value} />
@@ -25,7 +26,6 @@ export const SearchBar = (props: SearchProps) => {
 
 const Container = styled.div`
   margin-top: 50px;
-
   width: 50%;
   display: flex;
   justify-content: center;

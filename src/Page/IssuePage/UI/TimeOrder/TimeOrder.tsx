@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { TimeOrderItems } from "./TimeOrderItems";
 import styled from "styled-components";
 
 type TimeOrder = {
@@ -22,10 +20,9 @@ export const TimeOrder = (props: TimeOrder) => {
 };
 
 const Container = styled.div`
-  padding: 20px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 `;
 const Time = styled.div`
   cursor: pointer;
@@ -33,6 +30,7 @@ const Time = styled.div`
   background: #e5e5e5;
   border-radius: 10px;
   color: black;
+  flex: 1 0 auto;
   &.new {
     background: #0e8388;
     color:white;

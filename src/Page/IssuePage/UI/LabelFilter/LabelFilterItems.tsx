@@ -51,6 +51,7 @@ export const LabelFilterItems = (props: LabelFilterItemsProps) => {
 const Container = styled.div`
   display: flex;
   gap: 10px;
+  align-items: center;
 `;
 
 const LabelItem = styled.div`
@@ -58,6 +59,7 @@ const LabelItem = styled.div`
   padding: 10px;
   background: #e5e5e5;
   border-radius: 10px;
+  flex: 1 0 auto;
   &.selected {
     background: #0e8388;
     color: white;

@@ -32,8 +32,9 @@ export const LabelFilter = (props: LabelFilterProps) => {
 const Label = styled.div`
   display: flex;
   gap: 10px;
-  padding: 20px;
   font-weight: 400;
+  align-items: center;
+  justify-content: center;
   span {
     padding: 10px;
   }

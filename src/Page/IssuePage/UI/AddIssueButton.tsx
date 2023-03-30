@@ -26,7 +26,6 @@ export const AddNewIssueButton = () => {
 };
 
 const Add = styled.div`
-  padding: 20px;
   display: flex;
   align-items: center;
   .add {
@@ -34,5 +33,6 @@ const Add = styled.div`
     border-radius: 10px;
     padding: 10px;
     cursor: pointer;
+    flex: 1 0 auto;
   }
 `;

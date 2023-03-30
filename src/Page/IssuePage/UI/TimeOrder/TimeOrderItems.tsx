@@ -11,13 +11,12 @@ export const TimeOrderItems = (props: TimeOrderItemsProps) => {
       className={props.onPassTimeOrder ? "old" : "new"}
       onClick={() => props.onPassSetTimeOrderHandler(!props.onPassTimeOrder)}
     >
-      {/* {props.onPassTimeOrder ? "From Old To New" : "From New To Old"} */}
-      <label htmlFor="drop-menu">下拉式選單</label>
+      {/* <label htmlFor="drop-menu">下拉式選單</label>
       <input type="checkbox" id="drop-menu" />
       <ul className="menu-list">
         <li>From Old To New</li>
         <li>From New To Old</li>
-      </ul>
+      </ul> */}
     </TimeOrder>
   );
 };

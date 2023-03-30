@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { UpdateIssue } from "./IssueData/UpdateIssue";
 import { SearchBar } from "./UI/SearchBar";
 import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
@@ -27,39 +27,56 @@ export const IssuePage = () => {
   return (
     <Container ref={pageRef}>
       <SearchBar onPassSearchHandler={setSearch} />
-      <Filter>
+      <div className="filter">
         <LabelFilter
           onPassLabelFilterHandler={setlabelFilter}
           onPassLabelFilter={labelFilter}
         />
-        <TimeOrder
-          onPassSetTimeOrderHandler={setdescendent}
-          onPassTimeOrder={descendent}
-        />
-        <AddNewIssueButton />
-      </Filter>
-      <Issue>
+        <div className="time-add">
+          <TimeOrder
+            onPassSetTimeOrderHandler={setdescendent}
+            onPassTimeOrder={descendent}
+          />
+          <AddNewIssueButton />
+        </div>
+      </div>
+      <div className="issue">
         <UpdateIssue
           passSearch={search}
           passLabelFilter={labelFilter}
           passTimeOrder={descendent}
           passIsBottom={isBottom}
         />
-      </Issue>
+      </div>
     </Container>
   );
 };
 const Container = styled.div`
-  padding: 0px 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #e9f8f9;
   min-height: 100vh;
-`;
-const Issue = styled.div`
-  width: 60%;
-`;
-const Filter = styled.div`
-  display: flex;
+  .search-add {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .issue {
+    width: 60%;
+  }
+  .filter {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+  .time-add {
+    display: flex;
+    gap: 10px;
+  }
 `;
