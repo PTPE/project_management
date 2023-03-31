@@ -5,7 +5,7 @@ import { SearchBar } from "./UI/SearchBar";
 import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
 import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
 import { AddNewIssueButton } from "./UI/AddIssueButton";
-import { isPageBottom } from "../../Service/APIService";
+import { isPageBottom } from "../../Service/DetectPageBottomHook";
 
 export const IssuePage = () => {
   const [search, setSearch] = useState("");

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FormModal } from "../Modal/FormModal";
-import { editIssue } from "../../../../Service/APIService";
+import { editIssue } from "../../../../Service/UpdateIssueHook";
 import styled from "styled-components";
 
 type EditProps = {

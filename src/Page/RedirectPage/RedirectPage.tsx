@@ -1,4 +1,4 @@
-import { UserAuthorization } from "../../Service/UserAuthorization";
+import { UserAuthorization } from "../../Service/UserAuthorizationHook";
 import styled from "styled-components";
 export const RedirectPage = () => {
   UserAuthorization();

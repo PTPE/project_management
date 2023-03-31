@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { editIssue, addNewIssue } from "../../../../Service/APIService";
+import { editIssue, addNewIssue } from "../../../../Service/UpdateIssueHook";
 import styled from "styled-components";
 
 type SubmitFormProps = {
