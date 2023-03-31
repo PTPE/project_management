@@ -14,9 +14,12 @@ type StateOptiosProps = {
   passIssueNumber: string;
 };
 
-export const State = React.memo((props: StateOptiosProps) => {
+export const Status = React.memo((props: StateOptiosProps) => {
   const [clickState, setClickState] = useState(false);
   const options = ["open", "in progress", "closed"];
+  useEffect(() => {
+    console.log(123);
+  }, []);
 
   document.addEventListener("click", (e) => {
     if (!(e.target as Element).classList.contains("state"))
@@ -24,7 +27,7 @@ export const State = React.memo((props: StateOptiosProps) => {
   });
 
   return (
-    <div>
+    <Container>
       <CurrentState
         className="state"
         onClick={() => {
@@ -52,9 +55,12 @@ export const State = React.memo((props: StateOptiosProps) => {
           </li>
         ))}
       </Options>
-    </div>
+    </Container>
   );
 });
+const Container = styled.div`
+  position: relative;
+`;
 const CurrentState = styled.span`
   padding: 5px;
   cursor: pointer;
@@ -68,20 +74,15 @@ const Options = styled.div`
   flex-direction: column;
   gap: 10px;
   position: absolute;
-  left: -100px;
-  bottom: 75%;
+  bottom: 0;
+  left: -140px;
   background: white;
   border: 2px solid grey;
   border-radius: 10px;
   padding: 10px;
   list-style-type: square;
   cursor: pointer;
-  @media (max-width: 768px) {
-    position: absolute;
-    left: 15%;
-    top: -80px;
-    height: 100px;
-  }
+
   &.show {
     display: flex;
   }

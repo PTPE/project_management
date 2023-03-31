@@ -1,7 +1,6 @@
 import React from "react";
-import { useState } from "react";
 import { EditButton } from "./EditButton";
-import { State } from "./State";
+import { Status } from "./Status";
 import styled from "styled-components";
 
 type IssueCardProps = {
@@ -44,7 +43,7 @@ export const IssueCard = React.memo((props: IssueCardProps) => {
     return (
       <Container key={i}>
         <BasicInfo>
-          <State
+          <Status
             passState={capitalization(data.labels[0].name)}
             passEditData={{
               title: data.title,
