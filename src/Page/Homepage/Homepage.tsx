@@ -1,8 +1,6 @@
-import { useContext } from "react";
-import { UserContext } from "../IssuePage/IssueData/UserProvider";
 import styled from "styled-components";
 export const Homepage = () => {
-  const CLIENT_ID = useContext(UserContext).CLIENT_ID;
+  S;
 
   return (
     <Container>
