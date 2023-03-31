@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useState, useRef } from "react";
-import { UpdateIssue } from "./IssueData/UpdateIssue";
+import { UpdateIssue } from "./UI/IssueCard/UpdateIssue";
 import { SearchBar } from "./UI/SearchBar";
 import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
 import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
 import { AddNewIssueButton } from "./UI/AddIssueButton";
-import { isPageBottom } from "./IssueData/APIService";
+import { isPageBottom } from "../../Service/APIService";
 
 export const IssuePage = () => {
   const [search, setSearch] = useState("");

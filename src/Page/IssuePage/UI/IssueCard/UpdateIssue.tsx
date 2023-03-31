@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { IssueCard } from "../UI/IssueCard/IssueCard";
-import { fetchIssue } from "./APIService";
+import { IssueCard } from "./IssueCard";
+import { fetchIssue } from "../../../../Service/APIService";
 
 type UpdateIssueProps = {
   passSearch: string;

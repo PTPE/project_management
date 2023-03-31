@@ -1,7 +1,7 @@
-import { UserAithorization } from "../IssuePage/IssueData/UserAuthorization";
+import { UserAuthorization } from "../../Service/UserAuthorization";
 import styled from "styled-components";
 export const RedirectPage = () => {
-  UserAithorization();
+  UserAuthorization();
   return (
     <Container>
       <Ring>

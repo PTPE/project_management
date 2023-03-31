@@ -1,9 +1,7 @@
-import { useState, useEffect, useContext } from "react";
-import { UserContext } from "./UserProvider";
+import { useState, useEffect } from "react";
 
-export const UserAithorization = () => {
+export const UserAuthorization = () => {
   const [code, setCode] = useState("");
-  const ContextValue = useContext(UserContext);
 
   const fetchUserData = async () => {
     try {
@@ -12,7 +10,6 @@ export const UserAithorization = () => {
       if (!res.ok) throw new Error("Authorization fails");
       const storedData = { owner: data[0].login, token: data[1] };
       localStorage.setItem("user", JSON.stringify(storedData));
-      // ContextValue.setUser({ owner: data[0].login, token: data[1] });
     } catch (err) {
       alert(err);
     }

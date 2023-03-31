@@ -1,6 +1,6 @@
 import styled from "styled-components";
 export const Homepage = () => {
-  S;
+  const CLIENT_ID = "bf969790d4256f86647c";
 
   return (
     <Container>
