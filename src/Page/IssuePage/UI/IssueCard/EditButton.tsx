@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FormModal } from "../Modal/FormModal";
+import { editIssue } from "../../IssueData/APIService";
 import styled from "styled-components";
 
 type EditProps = {
@@ -35,7 +36,19 @@ export const EditButton = (props: EditProps) => {
         <span className="edit" onClick={() => setShowModal(true)}>
           Edit
         </span>
-        <span className="delete">Delete</span>
+        <span
+          className="delete"
+          onClick={() => {
+            editIssue(
+              JSON.parse(localStorage.getItem("user")!).owner,
+              JSON.parse(localStorage.getItem("user")!).token,
+              props.passIssueNumber,
+              { ...props.passDefaultValue, labels: ["closed"] }
+            );
+          }}
+        >
+          Delete
+        </span>
       </Options>
       {showModal ? (
         <FormModal
