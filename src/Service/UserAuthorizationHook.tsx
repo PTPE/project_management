@@ -4,15 +4,11 @@ export const UserAuthorization = () => {
   const [code, setCode] = useState("");
 
   const fetchUserData = async () => {
-    try {
-      const res = await fetch(`/code/${code}`);
-      const data = await res.json();
-      if (!res.ok) throw new Error("Authorization fails");
-      const storedData = { owner: data[0].login, token: data[1] };
-      localStorage.setItem("user", JSON.stringify(storedData));
-    } catch (err) {
-      alert(err);
-    }
+    const res = await fetch(`/code/${code}`);
+    const data = await res.json();
+    if (!res.ok) throw new Error("Authorization fails");
+    const storedData = { owner: data[0].login, token: data[1] };
+    localStorage.setItem("user", JSON.stringify(storedData));
   };
   useEffect(() => {
     const currentUrl = window.location.href;
@@ -24,6 +20,9 @@ export const UserAuthorization = () => {
   }, []);
 
   useEffect(() => {
+    if (window.location.href.includes("error"))
+      window.location.assign("http://localhost:3000/login");
+
     if (!code) return;
     fetchUserData()
       .then(
@@ -31,6 +30,9 @@ export const UserAuthorization = () => {
           !(localStorage.getItem("user")?.length === 0) &&
           window.location.assign("http://localhost:3000/issue")
       )
-      .catch((_) => window.location.assign("http://localhost:3000/login"));
+      .catch((err) => {
+        window.location.assign("http://localhost:3000/login");
+        alert(err);
+      });
   }, [code, localStorage.getItem("user")]);
 };
