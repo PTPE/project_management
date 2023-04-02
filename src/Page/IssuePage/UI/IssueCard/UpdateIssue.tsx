@@ -22,48 +22,40 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
     page: "",
   });
   const [issueData, setIssueData] = useState<String[]>([]);
+  const [stopLoading, setStopLoading] = useState(false);
 
   useEffect(() => {
-    setParams((prev) => {
-      return { ...prev, search: props.passSearch };
-    });
-    setParams((prev) => {
-      const owner = JSON.parse(localStorage.getItem("user")!).owner;
-      return { ...prev, owner: owner };
-    });
-    setParams((prev) => {
-      const label = () => {
-        const label = ["open", "in progress", "closed"];
-        const selected = label
-          .filter((_, i) => Object.values(props.passLabelFilter)[i])
-          .map((label) => `"${label}"`)
-          .join(",");
-        const result =
-          selected.length === 0
-            ? `label:"open","in progress","closed"`
-            : `label:${selected}`;
-        return result;
-      };
-
-      return { ...prev, label: label() };
-    });
-    if (props.passIsBottom)
-      setParams((prev) => {
-        const page =
-          issueData.length % 10 === 0
-            ? issueData.length / 10 + 1
-            : Math.ceil(issueData.length / 10);
-        return { ...prev, page: `${page}` };
-      });
-    setParams((prev) => {
-      const time = props.passTimeOrder ? "desc" : "asc";
-      return { ...prev, time: time };
+    setStopLoading(false);
+    const owner = JSON.parse(localStorage.getItem("user")!).owner;
+    const label = () => {
+      const label = ["open", "in progress", "closed"];
+      const selected = label
+        .filter((_, i) => Object.values(props.passLabelFilter)[i])
+        .map((label) => `"${label}"`)
+        .join(",");
+      const result =
+        selected.length === 0
+          ? `label:"open","in progress","closed"`
+          : `label:${selected}`;
+      return result;
+    };
+    const page = () => {
+      return issueData.length % 10 === 0
+        ? issueData.length / 10 + 1
+        : Math.ceil(issueData.length / 10);
+    };
+    const time = props.passTimeOrder ? "desc" : "asc";
+    setParams({
+      owner: owner,
+      search: props.passSearch,
+      label: label(),
+      time: time,
+      page: `${page()}`,
     });
   }, [
     props.passLabelFilter,
     props.passSearch,
     props.passTimeOrder,
-    props.passIsBottom,
     issueData.length,
   ]);
 
@@ -84,24 +76,26 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
   }, [params.owner, params.label, params.search, params.time]);
 
   useEffect(() => {
-    if (props.passIsBottom) {
-      (async () => {
-        if (!(params.owner.length === 0)) {
-          const data = await fetchIssue(
-            params.owner,
-            params.search,
-            params.label,
-            params.time,
-            params.page
-          );
-          if (!data) return;
+    if (!props.passIsBottom) return;
+    if (!(issueData.length % 10 === 0)) return;
+
+    (async () => {
+      if (!(params.owner.length === 0) && !stopLoading) {
+        const data = await fetchIssue(
+          params.owner,
+          params.search,
+          params.label,
+          params.time,
+          params.page
+        );
+        if (data.items.length === 0) setStopLoading(true);
+        else
           setIssueData((prev) => {
             return [...prev, ...data.items];
           });
-        }
-      })();
-    }
-  }, [params.page]);
+      }
+    })();
+  }, [props.passIsBottom]);
 
   return <IssueCard passIssueData={issueData}></IssueCard>;
 };
