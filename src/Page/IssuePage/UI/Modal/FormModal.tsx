@@ -16,7 +16,6 @@ type ModalContentProps = {
   passShowModalHandler: React.Dispatch<React.SetStateAction<boolean>>;
 };
 export const FormModal = (props: ModalContentProps) => {
-  const field = ["title", "repository", "labels", "body"];
   const [form, setForm] = useState(props.passDefaultValue);
   const labelOptions = ["open", "in progress", "closed"];
 
@@ -28,6 +27,7 @@ export const FormModal = (props: ModalContentProps) => {
       return value.length < 30 ? "show" : "not-show";
     }
   };
+
   return (
     <ModalPortal
       passShowModal={props.passShowModal}
@@ -35,40 +35,55 @@ export const FormModal = (props: ModalContentProps) => {
     >
       {
         <Field>
-          {field.map((field, i) => (
-            <FieldItem key={i}>
-              <label>{field[0].toUpperCase() + field.slice(1)}</label>
-              {field === "labels" ? (
-                <select
-                  defaultValue={`${props.passDefaultValue.labels}`}
-                  onChange={(e) => {
-                    setForm({ ...form, labels: e.target.value });
-                  }}
-                >
-                  {labelOptions.map((label) => (
-                    <option value={label} key={label}>
-                      {label[0].toUpperCase() + label.slice(1)}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <input
-                  defaultValue={props.passDefaultValue[field]}
-                  onChange={(e) => {
-                    setForm({
-                      ...form,
-                      [field]: e.target.value,
-                    });
-                  }}
-                  className={`${formCheck(field, form[field])}`}
-                />
-              )}
-              <div className={formCheck(field, form[field])}>
-                {field === "title" || field === "repository" ? "Required" : ""}
-                {field === "body" ? "At least 30 words" : ""}
-              </div>
-            </FieldItem>
-          ))}
+          <FieldItem>
+            <label>Title</label>
+            <input
+              defaultValue={props.passDefaultValue.title}
+              onChange={(e) => {
+                setForm({
+                  ...form,
+                  title: e.target.value,
+                });
+              }}
+            />
+            <div className={formCheck("title", form.title)}></div>
+            <label>Repository</label>
+            <input
+              disabled={props.passMode === "edit"}
+              defaultValue={props.passDefaultValue.title}
+              onChange={(e) => {
+                setForm({
+                  ...form,
+                  repository: e.target.value,
+                });
+              }}
+            />
+            <div className={formCheck("repository", form.repository)}></div>
+            <label>Label</label>
+            <select
+              defaultValue={`${props.passDefaultValue.labels}`}
+              onChange={(e) => {
+                setForm({ ...form, labels: e.target.value });
+              }}
+            >
+              {labelOptions.map((label) => (
+                <option value={label} key={label}>
+                  {label[0].toUpperCase() + label.slice(1)}
+                </option>
+              ))}
+            </select>
+            <label>Body</label>
+            <input
+              defaultValue={props.passDefaultValue.title}
+              onChange={(e) => {
+                setForm({
+                  ...form,
+                  body: e.target.value,
+                });
+              }}
+            />
+            <div className={formCheck("body", form.body)}></div>
+          </FieldItem>
           <SubmitForm
             passForm={form}
             passIssueNumber={props.passIssueNumber}

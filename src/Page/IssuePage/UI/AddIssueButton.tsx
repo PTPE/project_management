@@ -14,7 +14,12 @@ export const AddNewIssueButton = () => {
         <FormModal
           passShowModalHandler={setShowModal}
           passShowModal={showModal}
-          passDefaultValue={{ title: "", repository: "", labels: "", body: "" }}
+          passDefaultValue={{
+            title: "",
+            repository: "",
+            labels: "open",
+            body: "",
+          }}
           passIssueNumber="null"
           passMode="add"
         ></FormModal>
