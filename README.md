@@ -13,7 +13,7 @@ git clone https://github.com/PTPE/project_management.git
 2. 選取專案目錄
 
 ```shell
-cd your-project
+cd project_management
 ```
 
 3. 安裝專案套件
