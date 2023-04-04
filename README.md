@@ -130,34 +130,3 @@ order：資料以升冪或降冪排序
 ```
 https://api.github.com/search/issues?q=is:issue%20%20in:body+label:%22open%22,%22in%20progress%22,%22closed%22%20user:PTPE&per_page=10&page=1&order=desc
 ```
-
-- #### Page
-
-  專案有三個個頁面，每一頁在 src/Page 有獨立資料夾：Homepage、IssuePage、RedirectPage。
-
-  1. #### Homepage
-     ##### HomePage.tsx
-     使用者點擊登入按鈕後，頁面將會引導至 Github 登入頁面。登入完成後將會導入 RedirectPage。
-  2. #### RedirectPage
-     ##### RedirectPage.tsx
-     進入 RedirectPage 後，將會發送 API 請求至本專案的後端，由後端取得使用者的名稱和 token，再將名稱和 token 傳入 RedirectPage。以上流程完成後將會自動導入 IssuePage；若失敗，將導回 Homepage。
-  3. #### IssuePage
-     ##### IssuePage.tsx
-     負責所有該頁 component 的 layout，並偵測頁面是否滑到底部。
-     ##### SearchBar.tsx、TimeOrder.tsx、LabelFilter.tsx
-     將使用者選取的篩選條件，儲存傳至 Issue.tsx 中。
-     ##### FormModal.tsx
-     編輯或新增 issue 資料。
-     ##### Status.tsx
-     編輯 issue 狀態。
-
-- #### Server
-  ##### ProxyServer.js
-  建立獨立的後端，向 Github 發送 API 請求，取得使用者資料使用權限。
-- #### Service
-  ##### UpdateIssueHook.tsx
-  新增、修改 Issue 資料發送 API 請求的 function。
-  ##### UserAuthorizationHook.tsx
-  發送 API 請求取得使用者存取權的 function。
-  ##### DetectPageBottomHook.tsx
-  偵測頁面是否滑到底部的 function。
