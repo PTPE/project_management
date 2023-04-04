@@ -9,7 +9,6 @@ let token;
 
 app.get("/code/:dynamic", async (req, res) => {
   const code = req.params.dynamic;
-  console.log(code);
   const fetchTokenData = await fetch(
     `https://github.com/login/oauth/access_token?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${code}&redirect_uri=http://localhost:3000/redirect`,
     {
@@ -26,7 +25,6 @@ app.get("/code/:dynamic", async (req, res) => {
     method: "GET",
   });
   const UserData = await fetchUserData.json();
-  console.log(UserData);
   res.send([UserData, token]);
 });
 
