@@ -85,8 +85,7 @@ npm run server
 1.  取得 code
     點選下列網址，將導入至 Github 登入頁面；登入後將會重新導頁，其網址會附上 Github 給的 code。
 
-        下列網址參數：
-
+    下列網址參數：
     CLIEND_ID：應用程式在 GitHub OAuth 註冊的識別碼
     scope：存取使用者的資料類別，本專案存取使用者的 repository，參數為 repo。
     認證完後，網址會附上 Github 給的 code。
