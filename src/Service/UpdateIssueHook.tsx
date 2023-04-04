@@ -10,7 +10,7 @@ export const fetchIssue = async (
       `https://api.github.com/search/issues?q=is:issue%20${search}%20in:body+${label}%20user:${owner}&per_page=10&page=${page}&sort=created&order=${time}`
     );
     const data = await res.json();
-    if (!res.ok) throw new Error("API rate limit exceeded");
+    if (!res.ok) throw new Error(`${data.message}`);
 
     return data;
   } catch (err) {
@@ -29,6 +29,11 @@ export const addNewIssue = async (
   }
 ) => {
   try {
+    const pageReload = () => {
+      return new Promise((resolve, reject) => {
+        window.location.reload();
+      });
+    };
     const res = await fetch(
       `https://api.github.com/repos/${owner}/${body.repository}/issues`,
       {
@@ -39,7 +44,10 @@ export const addNewIssue = async (
         body: JSON.stringify(body),
       }
     );
-    if (!res.ok) throw new Error("API rate limit exceeded");
+    const data = await res.json();
+    await pageReload();
+
+    if (!res.ok) throw new Error(data.message);
   } catch (err) {
     alert(err);
   }
@@ -57,6 +65,11 @@ export const editIssue = async (
   }
 ) => {
   try {
+    const pageReload = () => {
+      return new Promise((resolve, reject) => {
+        window.location.reload();
+      });
+    };
     const res = await fetch(
       `https://api.github.com/repos/${owner}/${body.repository}/issues/${issueNumber}`,
       {
@@ -67,7 +80,10 @@ export const editIssue = async (
         body: JSON.stringify(body),
       }
     );
-    if (!res.ok) throw new Error("API rate limit exceeded");
+    const data = await res.json();
+    await pageReload();
+
+    if (!res.ok) throw new Error(data.message);
   } catch (err) {
     alert(err);
   }
