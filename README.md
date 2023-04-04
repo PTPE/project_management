@@ -86,8 +86,11 @@ npm run server
     點選下列網址，將導入至 Github 登入頁面；登入後將會重新導頁，其網址會附上 Github 給的 code。
 
     下列網址參數：
+    
     CLIEND_ID：應用程式在 GitHub OAuth 註冊的識別碼
+    
     scope：存取使用者的資料類別，本專案存取使用者的 repository，參數為 repo。
+    
     認證完後，網址會附上 Github 給的 code。
 
 ```
@@ -105,14 +108,23 @@ https://github.com/login/oauth/access_token?client_id=${CLIENT_ID}&client_secret
 
 向下列網址請求 API。
 網址參數：
+
 is：搜尋 pull request 或 issue
+
 search：用以篩選的字串內容
+
 in: search 參數的字串內容要用以篩選的對象
+
 labels: issue 的 label 篩選
+
 user: 使用者名稱
+
 per_page：每頁內容筆數
+
 page：第幾頁的內容
+
 sort：資料排序的標準
+
 order：資料以升冪或降冪排序
 
 ```
