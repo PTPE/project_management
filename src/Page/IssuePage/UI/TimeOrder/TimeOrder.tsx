@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 type TimeOrder = {
-  onPassSetTimeOrderHandler: Function;
-  onPassTimeOrder: Boolean;
+  passSetTimeOrderHandler: Function;
+  passTimeOrder: Boolean;
 };
 
 export const TimeOrder = (props: TimeOrder) => {
@@ -10,10 +10,10 @@ export const TimeOrder = (props: TimeOrder) => {
     <Container>
       <span>Time Order:</span>
       <Time
-        className={props.onPassTimeOrder ? "old" : "new"}
-        onClick={() => props.onPassSetTimeOrderHandler(!props.onPassTimeOrder)}
+        className={props.passTimeOrder ? "old" : "new"}
+        onClick={() => props.passSetTimeOrderHandler(!props.passTimeOrder)}
       >
-        {props.onPassTimeOrder ? "From Old To New" : "From New To Old"}
+        {props.passTimeOrder ? "From Old To New" : "From New To Old"}
       </Time>
     </Container>
   );

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 type SearchProps = {
-  onPassSearchHandler: Function;
+  passSearchHandler: Function;
 };
 
 export const SearchBar = (props: SearchProps) => {
@@ -13,7 +13,7 @@ export const SearchBar = (props: SearchProps) => {
 
   const submitHandler = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
     e.preventDefault();
-    props.onPassSearchHandler(value);
+    props.passSearchHandler(value);
   };
 
   return (

@@ -15,15 +15,14 @@ type StateOptiosProps = {
 };
 
 export const Status = React.memo((props: StateOptiosProps) => {
-  const [clickState, setClickState] = useState(false);
+  const [click, setClick] = useState(false);
   const options = ["open", "in progress", "closed"];
   useEffect(() => {
     console.log(123);
   }, []);
 
   document.addEventListener("click", (e) => {
-    if (!(e.target as Element).classList.contains("state"))
-      setClickState(false);
+    if (!(e.target as Element).classList.contains("state")) setClick(false);
   });
 
   return (
@@ -31,13 +30,13 @@ export const Status = React.memo((props: StateOptiosProps) => {
       <CurrentState
         className="state"
         onClick={() => {
-          setClickState(true);
+          setClick(true);
         }}
       >
         {props.passState}
       </CurrentState>
 
-      <Options className={clickState ? "show" : ""}>
+      <Options className={click ? "show" : ""}>
         {options.map((option) => (
           <li
             key={option}

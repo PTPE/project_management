@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ModalPortal } from "./Modal";
 import { SubmitForm } from "./SubmitForm";
 import styled from "styled-components";
@@ -23,16 +23,13 @@ export const FormModal = (props: ModalContentProps) => {
 
   const formCheck = (field: string, value: string) => {
     if (field === "title" || field === "repository") {
-      return value.length === 0 ? "show" : "not-show";
+      return value.length === 0 ? "show-warning" : "hide-warning";
     }
     if (field === "body") {
-      return value.length < 30 ? "show" : "not-show";
+      return value.length < 30 ? "show-warning" : "hide-warning";
     }
   };
-  useEffect(() => {
-    console.log(form);
-    console.log(props.passDefaultValue.labels);
-  }, [form]);
+
   return (
     <ModalPortal
       passShowModal={props.passShowModal}
@@ -118,18 +115,18 @@ const FieldItem = styled.div`
     position: absolute;
     bottom: -20px;
   }
-  div.show {
+  div.show-warning {
     color: red;
     font-size: 14px;
   }
-  div.not-show {
+  div.hide-warning {
     display: none;
   }
-  input.show {
+  input.show-warning {
     border: 2px solid red;
     outline: none;
   }
-  input.not-show {
+  input.hide-warning {
     border: 2px solid transparent;
     outline: none;
   }

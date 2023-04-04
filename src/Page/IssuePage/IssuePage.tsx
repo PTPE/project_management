@@ -26,16 +26,16 @@ export const IssuePage = () => {
 
   return (
     <Container ref={pageRef}>
-      <SearchBar onPassSearchHandler={setSearch} />
+      <SearchBar passSearchHandler={setSearch} />
       <div className="filter">
         <LabelFilter
-          onPassLabelFilterHandler={setlabelFilter}
-          onPassLabelFilter={labelFilter}
+          passLabelFilterHandler={setlabelFilter}
+          passLabelFilter={labelFilter}
         />
         <div className="time-add">
           <TimeOrder
-            onPassSetTimeOrderHandler={setdescendent}
-            onPassTimeOrder={descendent}
+            passSetTimeOrderHandler={setdescendent}
+            passTimeOrder={descendent}
           />
           <AddNewIssueButton />
         </div>
