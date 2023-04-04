@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import React from "react";
 
 type TimeOrder = {
   passSetTimeOrderHandler: Function;
   passTimeOrder: Boolean;
 };
 
-export const TimeOrder = (props: TimeOrder) => {
+export const TimeOrder = React.memo((props: TimeOrder) => {
   return (
     <Container>
       <span>Time Order:</span>
@@ -17,7 +18,7 @@ export const TimeOrder = (props: TimeOrder) => {
       </Time>
     </Container>
   );
-};
+});
 
 const Container = styled.div`
   display: flex;

@@ -1,10 +1,11 @@
 import { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 type SearchProps = {
   passSearchHandler: Function;
 };
 
-export const SearchBar = (props: SearchProps) => {
+export const SearchBar = React.memo((props: SearchProps) => {
   const [value, setValue] = useState("");
 
   const setValueHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +23,7 @@ export const SearchBar = (props: SearchProps) => {
       <SubmitButton value="Search" type="submit" onClick={submitHandler} />
     </Container>
   );
-};
+});
 
 const Container = styled.div`
   margin-top: 50px;

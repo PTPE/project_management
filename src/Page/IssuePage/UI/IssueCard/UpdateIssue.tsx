@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React from "react";
 import { IssueCard } from "./IssueCard";
 import { fetchIssue } from "../../../../Service/UpdateIssueHook";
 
@@ -13,7 +14,7 @@ type UpdateIssueProps = {
   passIsBottom: boolean;
 };
 
-export const UpdateIssue = (props: UpdateIssueProps) => {
+export const UpdateIssue = React.memo((props: UpdateIssueProps) => {
   const [params, setParams] = useState({
     owner: "",
     search: "",
@@ -98,4 +99,4 @@ export const UpdateIssue = (props: UpdateIssueProps) => {
   }, [props.passIsBottom]);
 
   return <IssueCard passIssueData={issueData}></IssueCard>;
-};
+});

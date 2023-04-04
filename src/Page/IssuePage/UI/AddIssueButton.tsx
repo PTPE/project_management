@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { FormModal } from "./Modal/FormModal";
+import React from "react";
 import styled from "styled-components";
 
-export const AddNewIssueButton = () => {
+export const AddNewIssueButton = React.memo(() => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -28,7 +29,7 @@ export const AddNewIssueButton = () => {
       )}
     </Add>
   );
-};
+});
 
 const Add = styled.div`
   display: flex;

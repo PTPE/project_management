@@ -1,4 +1,5 @@
 import { LabelFilterItems } from "./LabelFilterItems";
+import React from "react";
 import styled from "styled-components";
 
 type LabelFilterProps = {
@@ -16,7 +17,7 @@ type LabelFilterProps = {
   };
 };
 
-export const LabelFilter = (props: LabelFilterProps) => {
+export const LabelFilter = React.memo((props: LabelFilterProps) => {
   return (
     <Label>
       <span>Filter:</span>
@@ -26,7 +27,7 @@ export const LabelFilter = (props: LabelFilterProps) => {
       />
     </Label>
   );
-};
+});
 
 const Label = styled.div`
   display: flex;
