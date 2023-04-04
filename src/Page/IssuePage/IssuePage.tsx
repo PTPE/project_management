@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useState, useRef } from "react";
-import { UpdateIssue } from "./UI/IssueCard/UpdateIssue";
-import { SearchBar } from "./UI/SearchBar";
-import { LabelFilter } from "./UI/LabelFilter/LabelFilter";
-import { TimeOrder } from "./UI/TimeOrder/TimeOrder";
-import { AddNewIssueButton } from "./UI/AddIssueButton";
+import { UpdateIssue } from "./Components/IssueCard/UpdateIssue";
+import { SearchBar } from "./Components/SearchBar";
+import { LabelFilter } from "./Components/LabelFilter/LabelFilter";
+import { TimeOrder } from "./Components/IssueCard/TimeOrder";
+import { AddNewIssueButton } from "./Components/AddIssueButton";
 import { isPageBottom } from "../../Service/DetectPageBottomHook";
 
 export const IssuePage = () => {

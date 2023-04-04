@@ -17,9 +17,6 @@ type StateOptiosProps = {
 export const Status = React.memo((props: StateOptiosProps) => {
   const [click, setClick] = useState(false);
   const options = ["open", "in progress", "closed"];
-  useEffect(() => {
-    console.log(123);
-  }, []);
 
   document.addEventListener("click", (e) => {
     if (!(e.target as Element).classList.contains("state")) setClick(false);
