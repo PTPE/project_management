@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { IssueCard } from "./IssueCard";
-import { fetchIssue } from "../../../../Service/UpdateIssueHook";
+import { fetchIssue } from "../../../../Service/UpdateIssue";
 
-type UpdateIssueProps = {
+type IssueProps = {
   passSearch: string;
   passLabelFilter: {
     open: boolean;
@@ -14,7 +14,7 @@ type UpdateIssueProps = {
   passIsBottom: boolean;
 };
 
-export const UpdateIssue = React.memo((props: UpdateIssueProps) => {
+export const Issue = React.memo((props: IssueProps) => {
   const [params, setParams] = useState({
     owner: "",
     search: "",

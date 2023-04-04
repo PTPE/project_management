@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useState, useRef } from "react";
-import { UpdateIssue } from "./Components/IssueCard/UpdateIssue";
+import { Issue } from "./Components/IssueCard/Issue";
 import { SearchBar } from "./Components/SearchBar";
 import { LabelFilter } from "./Components/LabelFilter/LabelFilter";
 import { TimeOrder } from "./Components/IssueCard/TimeOrder";
 import { AddNewIssueButton } from "./Components/AddIssueButton";
-import { isPageBottom } from "../../Service/DetectPageBottomHook";
+import { isPageBottom } from "../../Service/DetectPageBottom";
 
 export const IssuePage = () => {
   const [search, setSearch] = useState("");
@@ -41,7 +41,7 @@ export const IssuePage = () => {
         </div>
       </div>
       <div className="issue">
-        <UpdateIssue
+        <Issue
           passSearch={search}
           passLabelFilter={labelFilter}
           passTimeOrder={descendent}

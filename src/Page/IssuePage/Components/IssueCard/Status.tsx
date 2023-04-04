@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { editIssue } from "../../../../Service/UpdateIssueHook";
+import { editIssue } from "../../../../Service/UpdateIssue";
 import React from "react";
 import styled from "styled-components";
 
