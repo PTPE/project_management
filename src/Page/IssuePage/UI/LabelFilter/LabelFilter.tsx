@@ -1,16 +1,15 @@
-import { useState } from "react";
 import { LabelFilterItems } from "./LabelFilterItems";
 import styled from "styled-components";
 
 type LabelFilterProps = {
-  onPassLabelFilterHandler: React.Dispatch<
+  passLabelFilterHandler: React.Dispatch<
     React.SetStateAction<{
       open: boolean;
       progress: boolean;
       closed: boolean;
     }>
   >;
-  onPassLabelFilter: {
+  passLabelFilter: {
     open: boolean;
     progress: boolean;
     closed: boolean;
@@ -22,8 +21,8 @@ export const LabelFilter = (props: LabelFilterProps) => {
     <Label>
       <span>Filter:</span>
       <LabelFilterItems
-        onPassLabelFilterHandler={props.onPassLabelFilterHandler}
-        onPassLabelFilter={props.onPassLabelFilter}
+        passLabelFilterHandler={props.passLabelFilterHandler}
+        passLabelFilter={props.passLabelFilter}
       />
     </Label>
   );

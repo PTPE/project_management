@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 type LabelFilterItemsProps = {
-  onPassLabelFilterHandler: React.Dispatch<
+  passLabelFilterHandler: React.Dispatch<
     React.SetStateAction<{
       open: boolean;
       progress: boolean;
       closed: boolean;
     }>
   >;
-  onPassLabelFilter: {
+  passLabelFilter: {
     open: boolean;
     progress: boolean;
     closed: boolean;
@@ -21,10 +20,10 @@ export const LabelFilterItems = (props: LabelFilterItemsProps) => {
   const filter = ["Open", "In Progress", "Closed"];
 
   const setSelectedHandler = (i: number) => {
-    const selectedFilterKeys = Object.keys(props.onPassLabelFilter)[i];
-    const selectedFilterValues = Object.values(props.onPassLabelFilter)[i];
+    const selectedFilterKeys = Object.keys(props.passLabelFilter)[i];
+    const selectedFilterValues = Object.values(props.passLabelFilter)[i];
 
-    props.onPassLabelFilterHandler((prev) => {
+    props.passLabelFilterHandler((prev) => {
       return { ...prev, [selectedFilterKeys]: !selectedFilterValues };
     });
   };
@@ -38,7 +37,7 @@ export const LabelFilterItems = (props: LabelFilterItemsProps) => {
           }}
           key={i}
           className={` ${
-            Object.values(props.onPassLabelFilter)[i] ? "selected" : ""
+            Object.values(props.passLabelFilter)[i] ? "selected" : ""
           }`}
         >
           {filter}
