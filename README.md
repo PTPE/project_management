@@ -33,9 +33,10 @@ npm start
 ```shell
 npm run server
 ```
-```diff
- 注意：前端網頁須以http://localhost:3000/開啟
-```
+注意：
+前端網頁須以http://localhost:3000/開啟
+後端Port號為8080
+
 ### 技術架構
 
 #### 前端
