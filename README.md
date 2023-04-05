@@ -33,7 +33,9 @@ npm start
 ```shell
 npm run server
 ```
-
+:::info
+注意：前端網頁要以http://localhost:3000/開啟
+:::
 ### 技術架構
 
 #### 前端
