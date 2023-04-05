@@ -4,9 +4,14 @@ import { Homepage } from "./Page/Homepage/Homepage";
 import { RedirectPage } from "./Page/RedirectPage/RedirectPage";
 import { IssuePage } from "./Page/IssuePage/IssuePage";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 
 const router = createBrowserRouter([
+  { path: "/", element: <Navigate to="/login" replace /> },
   {
     path: "/login",
     element: <Homepage />,
